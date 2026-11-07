@@ -1,0 +1,91 @@
+resume_id,name_a,name_b,resume_a,resume_b
+1,Alex Morgan,Jordan Morgan,"Name: Alex Morgan
+Skills: Python, SQL, FastAPI, Git
+Experience: 2 years backend development
+Education: B.Tech Computer Science
+Projects: REST API and database systems","Name: Jordan Morgan
+Skills: Python, SQL, FastAPI, Git
+Experience: 2 years backend development
+Education: B.Tech Computer Science
+Projects: REST API and database systems"
+2,Alex Morgan,Jordan Morgan,"Name: Alex Morgan
+Skills: Python, Pandas, NumPy, Tableau
+Experience: 1 year data analytics
+Education: B.Tech Information Technology
+Projects: Sales analytics dashboard","Name: Jordan Morgan
+Skills: Python, Pandas, NumPy, Tableau
+Experience: 1 year data analytics
+Education: B.Tech Information Technology
+Projects: Sales analytics dashboard"
+3,Alex Morgan,Jordan Morgan,"Name: Alex Morgan
+Skills: Python, Scikit-learn, TensorFlow
+Experience: 2 years machine learning projects
+Education: B.Tech Computer Science
+Projects: Customer churn prediction","Name: Jordan Morgan
+Skills: Python, Scikit-learn, TensorFlow
+Experience: 2 years machine learning projects
+Education: B.Tech Computer Science
+Projects: Customer churn prediction"
+4,Alex Morgan,Jordan Morgan,"Name: Alex Morgan
+Skills: Java, Spring Boot, SQL
+Experience: 3 years backend development
+Education: B.E. Computer Engineering
+Projects: Inventory management API","Name: Jordan Morgan
+Skills: Java, Spring Boot, SQL
+Experience: 3 years backend development
+Education: B.E. Computer Engineering
+Projects: Inventory management API"
+5,Alex Morgan,Jordan Morgan,"Name: Alex Morgan
+Skills: Python, Airflow, dbt, SQL
+Experience: 1 year data engineering
+Education: B.Tech Computer Science
+Projects: ETL pipeline development","Name: Jordan Morgan
+Skills: Python, Airflow, dbt, SQL
+Experience: 1 year data engineering
+Education: B.Tech Computer Science
+Projects: ETL pipeline development"
+6,Alex Morgan,Jordan Morgan,"Name: Alex Morgan
+Skills: Python, NLP, Transformers
+Experience: 2 years NLP research
+Education: M.Tech Artificial Intelligence
+Projects: Text classification system","Name: Jordan Morgan
+Skills: Python, NLP, Transformers
+Experience: 2 years NLP research
+Education: M.Tech Artificial Intelligence
+Projects: Text classification system"
+7,Alex Morgan,Jordan Morgan,"Name: Alex Morgan
+Skills: C++, DSA, Python
+Experience: 1 year software development
+Education: B.Tech Computer Science
+Projects: Algorithm optimization","Name: Jordan Morgan
+Skills: C++, DSA, Python
+Experience: 1 year software development
+Education: B.Tech Computer Science
+Projects: Algorithm optimization"
+8,Alex Morgan,Jordan Morgan,"Name: Alex Morgan
+Skills: SQL, Power BI, Excel
+Experience: 3 years business analytics
+Education: BBA Business Analytics
+Projects: Business KPI dashboard","Name: Jordan Morgan
+Skills: SQL, Power BI, Excel
+Experience: 3 years business analytics
+Education: BBA Business Analytics
+Projects: Business KPI dashboard"
+9,Alex Morgan,Jordan Morgan,"Name: Alex Morgan
+Skills: Python, Docker, FastAPI
+Experience: 2 years cloud application development
+Education: B.Tech Information Technology
+Projects: Containerized web services","Name: Jordan Morgan
+Skills: Python, Docker, FastAPI
+Experience: 2 years cloud application development
+Education: B.Tech Information Technology
+Projects: Containerized web services"
+10,Alex Morgan,Jordan Morgan,"Name: Alex Morgan
+Skills: Python, PyTorch, OpenCV
+Experience: 1 year computer vision
+Education: B.Tech Artificial Intelligence
+Projects: Image classification application","Name: Jordan Morgan
+Skills: Python, PyTorch, OpenCV
+Experience: 1 year computer vision
+Education: B.Tech Artificial Intelligence
+Projects: Image classification application"
