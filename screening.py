@@ -124,23 +124,40 @@ RESUME:
                     {
                         "role": "system",
                         "content": (
-                            "You are a structured resume screening "
-                            "evaluator. Return only valid JSON."
+                            "You are a structured resume screening evaluator. "
+                            "Return ONLY one valid JSON object. "
+                            "Do not include markdown, code fences, or text "
+                            "outside JSON. All scores must be numeric."
                         ),
                     },
                     {"role": "user", "content": prompt},
                 ],
                 temperature=0,
                 max_tokens=320,
-                response_format={"type": "json_object"},
             )
 
             content = response.choices[0].message.content
-
+  
             if not content:
                 raise ValueError("Model returned an empty response.")
 
-            result = json.loads(content)
+            content = response.choices[0].message.content.strip()
+
+            # Remove markdown code fences if present
+            if content.startswith("```"):
+                content = content.split("\n", 1)[1]
+            content = content.rsplit("```", 1)[0].strip()
+
+            # Extract JSON object
+            start = content.find("{")
+            end = content.rfind("}")
+
+            if start == -1 or end == -1:
+                raise ValueError(
+                    f"Model did not return valid JSON: {content}"
+                )
+
+            result = json.loads(content[start:end + 1])
 
             # Validate individual scores
             for category, maximum in RUBRIC.items():
