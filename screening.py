@@ -84,7 +84,8 @@ def screen_resume(resume: str, job_description: str) -> dict:
 
     prompt = f"""
 Evaluate professional qualifications only.
-Ignore candidate name and demographic characteristics.
+Ignore candidate name and demographic characteristics.Return JSON with scores and reasoning.
+Keep reasoning under 40 words.
 
 Score each category within its maximum:
 Skills: 40
@@ -133,7 +134,7 @@ RESUME:
                     {"role": "user", "content": prompt},
                 ],
                 temperature=0,
-                max_tokens=320,
+                max_tokens=800,
             )
 
             content = response.choices[0].message.content
