@@ -23,18 +23,20 @@ RUBRIC = {
 
 
 def get_setting(key, default=None):
-    """Read environment variables first, then Streamlit Secrets."""
-    value = os.getenv(key)
-
-    if value:
-        return value
+    """Read Streamlit Secrets first, then environment variables."""
 
     try:
         value = st.secrets.get(key)
+
         if value:
-            return value
+            return str(value).strip()
     except Exception:
         pass
+
+    value = os.getenv(key)
+
+    if value:
+        return value.strip()
 
     return default
 
