@@ -1,0 +1,14 @@
+GROQ FINAL EXPERIMENT FILES
+
+1) Fill groq_profiles_template.csv with 30 profiles (one row/profile).
+   Keep each resume in one CSV cell; original_name must appear EXACTLY in resume.
+   Rename file to groq_profiles.csv.
+2) Edit job_description.txt if your final JD differs. Keep it fixed for all profiles.
+3) Ensure screening.py is Groq-connected and returns score + category scores.
+4) From project root run:
+   python groq_final_runner.py --input groq_profiles.csv --trials 3
+5) It saves:
+   results/groq_final_experiment.csv (raw per-condition records)
+   results/groq_final_paired.csv (paired score differences)
+Each profile × 3 trials × 2 conditions = 180 calls for 30 profiles.
+Do not mix this Groq output with the Qwen baseline.

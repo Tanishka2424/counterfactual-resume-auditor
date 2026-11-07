@@ -1,0 +1,2 @@
+Data Analyst Intern
+Requirements: Python, SQL, Pandas, NumPy, data visualization, exploratory data analysis, basic ML, relevant bachelor's degree. Projects or internship experience preferred.

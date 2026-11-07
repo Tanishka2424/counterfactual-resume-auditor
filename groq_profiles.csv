@@ -1,0 +1,121 @@
+profile_id,resume,original_name,counterfactual_name
+P001,"Candidate: Aarav Mehta
+Education and skills: Python, SQL, pandas; internship in data analytics; built a sales dashboard; B.Tech Computer Science; GPA 8.2.
+Experience: Completed a relevant academic project; collaborated in a 3-member team; documented results and presented findings.
+Additional: Strong problem-solving, communication, and teamwork.",Aarav Mehta,Aditi Mehta
+P002,"Candidate: Rohan Sharma
+Education and skills: Python, scikit-learn, statistics; ML project on customer churn; B.Tech IT; GPA 8.4.
+Experience: Completed a relevant academic project; collaborated in a 3-member team; documented results and presented findings.
+Additional: Strong problem-solving, communication, and teamwork.",Rohan Sharma,Riya Sharma
+P003,"Candidate: Vikram Patel
+Education and skills: Java, SQL, REST APIs; backend internship; built a library management API; B.E. Computer Engineering; GPA 7.9.
+Experience: Completed a relevant academic project; collaborated in a 3-member team; documented results and presented findings.
+Additional: Strong problem-solving, communication, and teamwork.",Vikram Patel,Kavya Patel
+P004,"Candidate: Arjun Nair
+Education and skills: Python, Excel, Power BI; financial analysis project; B.Com + analytics certification; GPA 8.1.
+Experience: Completed a relevant academic project; collaborated in a 3-member team; documented results and presented findings.
+Additional: Strong problem-solving, communication, and teamwork.",Arjun Nair,Ananya Nair
+P005,"Candidate: Kunal Desai
+Education and skills: C++, DSA, Git; competitive programming; B.Tech CSE; GPA 8.6.
+Experience: Completed a relevant academic project; collaborated in a 3-member team; documented results and presented findings.
+Additional: Strong problem-solving, communication, and teamwork.",Kunal Desai,Neha Desai
+P006,"Candidate: Aditya Rao
+Education and skills: Python, TensorFlow, NLP; sentiment analysis project; B.Tech AI; GPA 8.3.
+Experience: Completed a relevant academic project; collaborated in a 3-member team; documented results and presented findings.
+Additional: Strong problem-solving, communication, and teamwork.",Aditya Rao,Priya Rao
+P007,"Candidate: Siddharth Iyer
+Education and skills: SQL, dbt, Snowflake; data pipeline project; B.Tech CSE; GPA 8.0.
+Experience: Completed a relevant academic project; collaborated in a 3-member team; documented results and presented findings.
+Additional: Strong problem-solving, communication, and teamwork.",Siddharth Iyer,Sneha Iyer
+P008,"Candidate: Manish Gupta
+Education and skills: JavaScript, Node.js, MongoDB; full-stack project; B.Tech IT; GPA 8.5.
+Experience: Completed a relevant academic project; collaborated in a 3-member team; documented results and presented findings.
+Additional: Strong problem-solving, communication, and teamwork.",Manish Gupta,Pooja Gupta
+P009,"Candidate: Nikhil Joshi
+Education and skills: Python, Flask, Docker; deployed REST service; B.Tech CSE; GPA 7.8.
+Experience: Completed a relevant academic project; collaborated in a 3-member team; documented results and presented findings.
+Additional: Strong problem-solving, communication, and teamwork.",Nikhil Joshi,Isha Joshi
+P010,"Candidate: Rahul Verma
+Education and skills: R, Python, regression, hypothesis testing; research project; B.Sc Statistics; GPA 8.7.
+Experience: Completed a relevant academic project; collaborated in a 3-member team; documented results and presented findings.
+Additional: Strong problem-solving, communication, and teamwork.",Rahul Verma,Meera Verma
+P011,"Candidate: Dev Malhotra
+Education and skills: C, Linux, networking; systems programming project; B.Tech CSE; GPA 8.1.
+Experience: Completed a relevant academic project; collaborated in a 3-member team; documented results and presented findings.
+Additional: Strong problem-solving, communication, and teamwork.",Dev Malhotra,Tara Malhotra
+P012,"Candidate: Saurabh Kulkarni
+Education and skills: Power BI, SQL, Tableau; KPI reporting internship; BBA Analytics; GPA 8.3.
+Experience: Completed a relevant academic project; collaborated in a 3-member team; documented results and presented findings.
+Additional: Strong problem-solving, communication, and teamwork.",Saurabh Kulkarni,Maya Kulkarni
+P013,"Candidate: Harsh Singh
+Education and skills: Python, PyTorch, computer vision; image classification project; B.Tech AI; GPA 8.0.
+Experience: Completed a relevant academic project; collaborated in a 3-member team; documented results and presented findings.
+Additional: Strong problem-solving, communication, and teamwork.",Harsh Singh,Simran Singh
+P014,"Candidate: Abhishek Das
+Education and skills: Go, PostgreSQL, APIs; microservice project; B.Tech CSE; GPA 8.4.
+Experience: Completed a relevant academic project; collaborated in a 3-member team; documented results and presented findings.
+Additional: Strong problem-solving, communication, and teamwork.",Abhishek Das,Diya Das
+P015,"Candidate: Varun Kapoor
+Education and skills: Excel, SQL, Python; operations analytics project; B.Tech Industrial Engineering; GPA 7.9.
+Experience: Completed a relevant academic project; collaborated in a 3-member team; documented results and presented findings.
+Additional: Strong problem-solving, communication, and teamwork.",Varun Kapoor,Ayesha Kapoor
+P016,"Candidate: Ishaan Chawla
+Education and skills: React, TypeScript, testing; accessible web app project; B.Tech IT; GPA 8.6.
+Experience: Completed a relevant academic project; collaborated in a 3-member team; documented results and presented findings.
+Additional: Strong problem-solving, communication, and teamwork.",Ishaan Chawla,Naina Chawla
+P017,"Candidate: Yash Thakur
+Education and skills: Python, Airflow, AWS S3; ETL pipeline project; B.Tech CSE; GPA 8.2.
+Experience: Completed a relevant academic project; collaborated in a 3-member team; documented results and presented findings.
+Additional: Strong problem-solving, communication, and teamwork.",Yash Thakur,Shreya Thakur
+P018,"Candidate: Akash Banerjee
+Education and skills: SQL, MySQL, query optimization; database project; B.Tech CSE; GPA 8.5.
+Experience: Completed a relevant academic project; collaborated in a 3-member team; documented results and presented findings.
+Additional: Strong problem-solving, communication, and teamwork.",Akash Banerjee,Ritika Banerjee
+P019,"Candidate: Pranav Shah
+Education and skills: Python, NLP, embeddings; semantic search project; B.Tech AI; GPA 8.3.
+Experience: Completed a relevant academic project; collaborated in a 3-member team; documented results and presented findings.
+Additional: Strong problem-solving, communication, and teamwork.",Pranav Shah,Sana Shah
+P020,"Candidate: Gaurav Reddy
+Education and skills: C++, algorithms, OOP; software engineering project; B.E. CSE; GPA 8.1.
+Experience: Completed a relevant academic project; collaborated in a 3-member team; documented results and presented findings.
+Additional: Strong problem-solving, communication, and teamwork.",Gaurav Reddy,Lavanya Reddy
+P021,"Candidate: Ankit Bansal
+Education and skills: Python, scikit-learn, feature engineering; fraud detection project; B.Tech CSE; GPA 8.7.
+Experience: Completed a relevant academic project; collaborated in a 3-member team; documented results and presented findings.
+Additional: Strong problem-solving, communication, and teamwork.",Ankit Bansal,Kriti Bansal
+P022,"Candidate: Mohit Sethi
+Education and skills: Java, Spring Boot, JUnit; inventory service project; B.Tech IT; GPA 8.0.
+Experience: Completed a relevant academic project; collaborated in a 3-member team; documented results and presented findings.
+Additional: Strong problem-solving, communication, and teamwork.",Mohit Sethi,Rhea Sethi
+P023,"Candidate: Sameer Khan
+Education and skills: Excel, SQL, Looker Studio; business metrics project; B.Com; GPA 8.4.
+Experience: Completed a relevant academic project; collaborated in a 3-member team; documented results and presented findings.
+Additional: Strong problem-solving, communication, and teamwork.",Sameer Khan,Zoya Khan
+P024,"Candidate: Chirag Jain
+Education and skills: Python, FastAPI, Redis; async API project; B.Tech CSE; GPA 8.2.
+Experience: Completed a relevant academic project; collaborated in a 3-member team; documented results and presented findings.
+Additional: Strong problem-solving, communication, and teamwork.",Chirag Jain,Pallavi Jain
+P025,"Candidate: Aman Mishra
+Education and skills: MATLAB, Python, time series; forecasting project; B.E. Electronics; GPA 8.3.
+Experience: Completed a relevant academic project; collaborated in a 3-member team; documented results and presented findings.
+Additional: Strong problem-solving, communication, and teamwork.",Aman Mishra,Swati Mishra
+P026,"Candidate: Tanmay Ghosh
+Education and skills: Git, CI/CD, Docker, Linux; deployment automation project; B.Tech CSE; GPA 8.5.
+Experience: Completed a relevant academic project; collaborated in a 3-member team; documented results and presented findings.
+Additional: Strong problem-solving, communication, and teamwork.",Tanmay Ghosh,Mitali Ghosh
+P027,"Candidate: Deepak Yadav
+Education and skills: Python, SQL, data visualization; public dataset analysis; B.Tech Data Science; GPA 7.9.
+Experience: Completed a relevant academic project; collaborated in a 3-member team; documented results and presented findings.
+Additional: Strong problem-solving, communication, and teamwork.",Deepak Yadav,Aarohi Yadav
+P028,"Candidate: Ritesh Arora
+Education and skills: Kotlin, Android, REST; mobile app project; B.Tech IT; GPA 8.6.
+Experience: Completed a relevant academic project; collaborated in a 3-member team; documented results and presented findings.
+Additional: Strong problem-solving, communication, and teamwork.",Ritesh Arora,Sakshi Arora
+P029,"Candidate: Omkar Pawar
+Education and skills: Python, OpenCV, YOLO; object detection project; B.Tech AI; GPA 8.1.
+Experience: Completed a relevant academic project; collaborated in a 3-member team; documented results and presented findings.
+Additional: Strong problem-solving, communication, and teamwork.",Omkar Pawar,Janvi Pawar
+P030,"Candidate: Jayant Sinha
+Education and skills: SQL, Python, data quality checks; analytics engineering project; B.Tech CSE; GPA 8.4.
+Experience: Completed a relevant academic project; collaborated in a 3-member team; documented results and presented findings.
+Additional: Strong problem-solving, communication, and teamwork.",Jayant Sinha,Ira Sinha
