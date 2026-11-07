@@ -4,16 +4,26 @@ import json
 import time
 from functools import lru_cache
 
+import streamlit as st
 from openai import OpenAI
 
 # ============================================================
 # CONFIGURATION
 # ============================================================
 
-import streamlit as st
+REQUEST_TIMEOUT = 90
+MAX_ATTEMPTS = 3
+
+RUBRIC = {
+    "skills_score": 40,
+    "experience_score": 30,
+    "education_score": 20,
+    "relevance_score": 10,
+}
+
 
 def get_setting(key, default=None):
-    """Read configuration from environment or Streamlit Secrets."""
+    """Read environment variables first, then Streamlit Secrets."""
     value = os.getenv(key)
 
     if value:
@@ -30,66 +40,29 @@ def get_setting(key, default=None):
 
 
 MODEL_NAME = get_setting(
-    "OLLAMA_MODEL",
-    "qwen2.5:1.5b"
+    "GROQ_MODEL",
+    "openai/gpt-oss-20b",
 )
 
-INFERENCE_MODE = get_setting(
-    "INFERENCE_MODE",
-    "local"
-).lower()
-
-REQUEST_TIMEOUT = 120
-MAX_ATTEMPTS = 3
-
-RUBRIC = {
-    "skills_score": 40,
-    "experience_score": 30,
-    "education_score": 20,
-    "relevance_score": 10,
-}
-
 # ============================================================
-# CLIENT CONFIGURATION
+# GROQ CLIENT
 # ============================================================
 
 @lru_cache(maxsize=1)
 def get_client():
-    """Create an inference client based on the selected mode."""
+    api_key = get_setting("GROQ_API_KEY")
 
-    if INFERENCE_MODE == "cloud":
-        api_key = os.getenv("OLLAMA_API_KEY")
-
-        if not api_key:
-            try:
-                import streamlit as st
-                api_key = st.secrets.get("OLLAMA_API_KEY")
-            except Exception:
-                api_key = None
-
-        if not api_key:
-            raise RuntimeError(
-                "OLLAMA_API_KEY is missing. "
-                "Configure it in Streamlit Secrets."
-            )
-
-        return OpenAI(
-            base_url="https://ollama.com/v1",
-            api_key=api_key,
-            timeout=REQUEST_TIMEOUT,
-            max_retries=0,
+    if not api_key:
+        raise RuntimeError(
+            "GROQ_API_KEY is missing. "
+            "Add it to Streamlit Secrets."
         )
 
-    if INFERENCE_MODE == "local":
-        return OpenAI(
-            base_url="http://localhost:11434/v1",
-            api_key="ollama",
-            timeout=REQUEST_TIMEOUT,
-            max_retries=0,
-        )
-
-    raise ValueError(
-        "INFERENCE_MODE must be 'local' or 'cloud'."
+    return OpenAI(
+        base_url="https://api.groq.com/openai/v1",
+        api_key=api_key,
+        timeout=REQUEST_TIMEOUT,
+        max_retries=0,
     )
 
 
@@ -98,12 +71,15 @@ def get_client():
 # ============================================================
 
 def screen_resume(resume: str, job_description: str) -> dict:
-    """Screen a resume using the configured Ollama inference mode."""
+    """Evaluate resume qualifications using Groq."""
 
     if not isinstance(resume, str) or not resume.strip():
         raise ValueError("Resume cannot be empty.")
 
-    if not isinstance(job_description, str) or not job_description.strip():
+    if (
+        not isinstance(job_description, str)
+        or not job_description.strip()
+    ):
         raise ValueError("Job description cannot be empty.")
 
     prompt = f"""
@@ -166,7 +142,7 @@ RESUME:
 
             result = json.loads(content)
 
-            # Validate individual rubric scores
+            # Validate individual scores
             for category, maximum in RUBRIC.items():
                 value = result.get(category)
 
@@ -179,7 +155,7 @@ RESUME:
                         f"Invalid score for {category}: {value}"
                     )
 
-            # Compute total locally; never trust model total
+            # Compute total locally
             result["score"] = sum(
                 result[category] for category in RUBRIC
             )
@@ -194,33 +170,30 @@ RESUME:
         except Exception as error:
             last_error = error
 
+            # Avoid retrying authentication, model, or billing errors
+            status_code = getattr(error, "status_code", None)
+
+            if status_code in (400, 401, 402, 403, 404):
+                break
+
             if attempt < MAX_ATTEMPTS:
                 time.sleep(attempt * 2)
 
     raise RuntimeError(
-        f"Screening failed after {MAX_ATTEMPTS} attempts: "
+        f"Groq screening failed: "
         f"{type(last_error).__name__}: {last_error}"
     ) from last_error
 
 
 # ============================================================
-# CONFIGURATION HELPER
+# CONFIGURATION DISPLAY
 # ============================================================
 
-def get_screening_config() -> dict:
-    """Return safe configuration details without exposing secrets."""
-
+def get_screening_config():
     return {
-        "mode": INFERENCE_MODE,
+        "provider": "Groq",
         "model": MODEL_NAME,
-        "provider": (
-            "Ollama Cloud"
-            if INFERENCE_MODE == "cloud"
-            else "Local Ollama"
-        ),
-        "api_key_configured": (
-            bool(os.getenv("OLLAMA_API_KEY"))
-            if INFERENCE_MODE == "cloud"
-            else None
+        "api_key_configured": bool(
+            get_setting("GROQ_API_KEY")
         ),
     }
