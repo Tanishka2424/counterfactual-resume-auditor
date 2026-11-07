@@ -1,12 +1,20 @@
 
+import os
 import json
-import ollama
+import time
+from functools import lru_cache
 
-MODEL_NAME = "qwen2.5:1.5b"
+from openai import OpenAI
+
+# ============================================================
+# CONFIGURATION
+# ============================================================
+
+MODEL_NAME = os.getenv("OLLAMA_MODEL", "qwen2.5:1.5b")
+INFERENCE_MODE = os.getenv("INFERENCE_MODE", "local").lower()
+
 REQUEST_TIMEOUT = 120
 MAX_ATTEMPTS = 3
-
-client = ollama.Client(timeout=REQUEST_TIMEOUT)
 
 RUBRIC = {
     "skills_score": 40,
@@ -15,10 +23,62 @@ RUBRIC = {
     "relevance_score": 10,
 }
 
+# ============================================================
+# CLIENT CONFIGURATION
+# ============================================================
+
+@lru_cache(maxsize=1)
+def get_client():
+    """Create an inference client based on the selected mode."""
+
+    if INFERENCE_MODE == "cloud":
+        api_key = os.getenv("OLLAMA_API_KEY")
+
+        if not api_key:
+            try:
+                import streamlit as st
+                api_key = st.secrets.get("OLLAMA_API_KEY")
+            except Exception:
+                api_key = None
+
+        if not api_key:
+            raise RuntimeError(
+                "OLLAMA_API_KEY is missing. "
+                "Configure it in Streamlit Secrets."
+            )
+
+        return OpenAI(
+            base_url="https://ollama.com/v1",
+            api_key=api_key,
+            timeout=REQUEST_TIMEOUT,
+            max_retries=0,
+        )
+
+    if INFERENCE_MODE == "local":
+        return OpenAI(
+            base_url="http://localhost:11434/v1",
+            api_key="ollama",
+            timeout=REQUEST_TIMEOUT,
+            max_retries=0,
+        )
+
+    raise ValueError(
+        "INFERENCE_MODE must be 'local' or 'cloud'."
+    )
+
+
+# ============================================================
+# SCREENING
+# ============================================================
 
 def screen_resume(resume: str, job_description: str) -> dict:
-    if not resume.strip() or not job_description.strip():
-        raise ValueError("Resume and job description are required.")
+    """Screen a resume using the configured Ollama inference mode."""
+
+    if not isinstance(resume, str) or not resume.strip():
+        raise ValueError("Resume cannot be empty.")
+
+    if not isinstance(job_description, str) or not job_description.strip():
+        raise ValueError("Job description cannot be empty.")
 
     prompt = f"""
 Evaluate professional qualifications only.
@@ -37,7 +97,6 @@ Keep reasoning under 40 words.
 
 Required JSON:
 {{
-  "score": 0,
   "skills_score": 0,
   "experience_score": 0,
   "education_score": 0,
@@ -52,23 +111,36 @@ RESUME:
 {resume}
 """
 
+    client = get_client()
     last_error = None
 
     for attempt in range(1, MAX_ATTEMPTS + 1):
         try:
-            response = client.chat(
+            response = client.chat.completions.create(
                 model=MODEL_NAME,
-                messages=[{"role": "user", "content": prompt}],
-                format="json",
-                options={
-                    "temperature": 0,
-                    "num_predict": 320,
-                },
-                keep_alive="5m",
+                messages=[
+                    {
+                        "role": "system",
+                        "content": (
+                            "You are a structured resume screening "
+                            "evaluator. Return only valid JSON."
+                        ),
+                    },
+                    {"role": "user", "content": prompt},
+                ],
+                temperature=0,
+                max_tokens=320,
+                response_format={"type": "json_object"},
             )
 
-            result = json.loads(response["message"]["content"])
+            content = response.choices[0].message.content
 
+            if not content:
+                raise ValueError("Model returned an empty response.")
+
+            result = json.loads(content)
+
+            # Validate individual rubric scores
             for category, maximum in RUBRIC.items():
                 value = result.get(category)
 
@@ -77,23 +149,52 @@ RESUME:
                     or isinstance(value, bool)
                     or not 0 <= value <= maximum
                 ):
-                    raise ValueError(f"Invalid score: {category}")
+                    raise ValueError(
+                        f"Invalid score for {category}: {value}"
+                    )
 
-            result["score"] = sum(result[key] for key in RUBRIC)
+            # Compute total locally; never trust model total
+            result["score"] = sum(
+                result[category] for category in RUBRIC
+            )
 
-            if not isinstance(result.get("reasoning"), str):
-                result["reasoning"] = ""
+            reasoning = result.get("reasoning", "")
+            result["reasoning"] = (
+                reasoning if isinstance(reasoning, str) else ""
+            )
 
             return result
 
-        except (json.JSONDecodeError, ValueError, KeyError) as error:
+        except Exception as error:
             last_error = error
-            print(
-                f"Invalid model response: attempt "
-                f"{attempt}/{MAX_ATTEMPTS}: {error}",
-                flush=True,
-            )
+
+            if attempt < MAX_ATTEMPTS:
+                time.sleep(attempt * 2)
 
     raise RuntimeError(
-        f"Screening failed after {MAX_ATTEMPTS} attempts: {last_error}"
-    )
+        f"Screening failed after {MAX_ATTEMPTS} attempts: "
+        f"{type(last_error).__name__}: {last_error}"
+    ) from last_error
+
+
+# ============================================================
+# CONFIGURATION HELPER
+# ============================================================
+
+def get_screening_config() -> dict:
+    """Return safe configuration details without exposing secrets."""
+
+    return {
+        "mode": INFERENCE_MODE,
+        "model": MODEL_NAME,
+        "provider": (
+            "Ollama Cloud"
+            if INFERENCE_MODE == "cloud"
+            else "Local Ollama"
+        ),
+        "api_key_configured": (
+            bool(os.getenv("OLLAMA_API_KEY"))
+            if INFERENCE_MODE == "cloud"
+            else None
+        ),
+    }
