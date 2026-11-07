@@ -10,8 +10,34 @@ from openai import OpenAI
 # CONFIGURATION
 # ============================================================
 
-MODEL_NAME = os.getenv("OLLAMA_MODEL", "qwen2.5:1.5b")
-INFERENCE_MODE = os.getenv("INFERENCE_MODE", "local").lower()
+import streamlit as st
+
+def get_setting(key, default=None):
+    """Read configuration from environment or Streamlit Secrets."""
+    value = os.getenv(key)
+
+    if value:
+        return value
+
+    try:
+        value = st.secrets.get(key)
+        if value:
+            return value
+    except Exception:
+        pass
+
+    return default
+
+
+MODEL_NAME = get_setting(
+    "OLLAMA_MODEL",
+    "qwen2.5:1.5b"
+)
+
+INFERENCE_MODE = get_setting(
+    "INFERENCE_MODE",
+    "local"
+).lower()
 
 REQUEST_TIMEOUT = 120
 MAX_ATTEMPTS = 3
